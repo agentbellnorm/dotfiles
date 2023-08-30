@@ -26,5 +26,17 @@ return {
       {'hrsh7th/cmp-nvim-lsp'}, -- Required
       {'L3MON4D3/LuaSnip'},     -- Required
     }
-  }
+  },
+  {
+	"Pocco81/auto-save.nvim",
+
+	config = function()
+		 require("auto-save").setup {
+			-- your config goes here
+			-- or just leave it empty :)
+		 }
+	end
+  },
+  { "neovim/nvim-lspconfig" },
+  {'simrat39/rust-tools.nvim'},
 }
