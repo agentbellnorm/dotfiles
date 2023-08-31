@@ -47,5 +47,6 @@ return {
             -- add any options here
         },
         lazy = false,
-    }
+    },
+    { 'lewis6991/gitsigns.nvim' }
 }

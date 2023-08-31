@@ -27,3 +27,5 @@ require("Comment").setup({
 })
 
 require'lspconfig'.lua_ls.setup{}
+
+require('gitsigns').setup()
