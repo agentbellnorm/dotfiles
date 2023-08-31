@@ -5,4 +5,5 @@
 [ ] startup screen
 [ ] stack file navigation
 [x] terminal (not with vim)
-[x]x find usages
+[x] find usages
+[ ] refactor: https://github.com/ThePrimeagen/refactoring.nvim
