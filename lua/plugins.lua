@@ -48,5 +48,6 @@ return {
         },
         lazy = false,
     },
-    { 'lewis6991/gitsigns.nvim' }
+    { 'lewis6991/gitsigns.nvim' },
+    { 'mg979/vim-visual-multi' }
 }
