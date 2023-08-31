@@ -1,7 +1,8 @@
 
 ## todo
-[ ] toggle comment
+[x] toggle comment
 [ ] refactor, rename
 [ ] startup screen
 [ ] stack file navigation
-[ ] terminal
+[x] terminal (not with vim)
+[x]x find usages
