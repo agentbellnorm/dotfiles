@@ -15,3 +15,15 @@ require("lazy").setup('plugins')
 
 require("telescope").setup()
 
+require("Comment").setup({
+    toggler = {
+        line = '<leader>c',
+        block = '<leader>bc',
+    },
+    opleader = {
+        line = '<leader>c',
+        block = '<leader>b',
+    },
+})
+
+require'lspconfig'.lua_ls.setup{}
