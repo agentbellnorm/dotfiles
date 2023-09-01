@@ -49,5 +49,7 @@ return {
         lazy = false,
     },
     { 'lewis6991/gitsigns.nvim' },
-    { 'mg979/vim-visual-multi' }
+    { 'mg979/vim-visual-multi' },
+    {'jose-elias-alvarez/null-ls.nvim'},
+    {'MunifTanjim/prettier.nvim'},
 }

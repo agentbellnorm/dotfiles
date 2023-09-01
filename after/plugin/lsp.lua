@@ -4,7 +4,7 @@ lsp.preset('recommended')
 
 lsp.ensure_installed({
 	'tsserver',
-	'eslint',
+	-- 'eslint',
 	'rust_analyzer',
 })
 
@@ -40,4 +40,14 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
+
+
+
+-- stuff
+require('lspconfig').tsserver.setup({
+  on_init = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentFormattingRangeProvider = false
+  end
+})
 

@@ -30,7 +30,7 @@ vim.keymap.set("n", "Q", "<nop>")
 -- switch project, not sure what's needed
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- format
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+-- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- not sure
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
