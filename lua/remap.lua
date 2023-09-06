@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
 
 -- move blocks around in visual mode 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -29,8 +29,9 @@ vim.keymap.set("n", "Q", "<nop>")
 
 -- switch project, not sure what's needed
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
 -- format
--- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- not sure
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -49,4 +50,5 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
+-- navigate back
 vim.keymap.set("n", "<leader>b", "<C-o>")

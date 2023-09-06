@@ -36,6 +36,7 @@ return {
             require("auto-save").setup {
                 -- your config goes here
                 -- or just leave it empty :)
+                debounce_delay = 2000
             }
         end
     },
@@ -52,4 +53,11 @@ return {
     { 'mg979/vim-visual-multi' },
     {'jose-elias-alvarez/null-ls.nvim'},
     {'MunifTanjim/prettier.nvim'},
+    {'nvim-treesitter/nvim-treesitter-context'},
+    {
+        'nvim-tree/nvim-tree.lua', 
+        dependencies = {
+            {'nvim-tree/nvim-web-devicons'}
+        }
+    }
 }
