@@ -4,6 +4,5 @@ vim.g.loaded_netrwPlugin = 1
 
 
 require "remap"
-require "options"
 require "lazy-config"
 require "set"
