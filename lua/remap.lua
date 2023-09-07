@@ -56,3 +56,9 @@ vim.keymap.set("n", "<leader>b", "<C-o>")
 vim.keymap.set("n", "<leader><TAB>", function() 
     require"stacked".switch_buffer()
 end)
+
+-- window movement
+vim.keymap.set("n", "<leader>wk", "<C-w>k")
+vim.keymap.set("n", "<leader>wl", "<C-w>l")
+vim.keymap.set("n", "<leader>wj", "<C-w>j")
+vim.keymap.set("n", "<leader>wh", "<C-w>h")
