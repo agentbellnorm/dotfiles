@@ -52,3 +52,7 @@ end)
 
 -- navigate back
 vim.keymap.set("n", "<leader>b", "<C-o>")
+
+vim.keymap.set("n", "<leader><TAB>", function() 
+    require"stacked".switch_buffer()
+end)
