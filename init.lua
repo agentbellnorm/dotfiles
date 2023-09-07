@@ -6,3 +6,4 @@ vim.g.loaded_netrwPlugin = 1
 require "remap"
 require "lazy-config"
 require "set"
+require "stacked"
