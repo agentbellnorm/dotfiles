@@ -18,11 +18,11 @@ require("telescope").setup()
 require("Comment").setup({
     toggler = {
         line = '<leader>c',
-        block = '<leader>bc',
+        -- block = '<leader>bc',
     },
     opleader = {
         line = '<leader>c',
-        block = '<leader>bc',
+        -- block = '<leader>bc', -- slows down <leader>b for backing
     },
 })
 
