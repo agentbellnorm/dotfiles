@@ -59,5 +59,6 @@ return {
         dependencies = {
             {'nvim-tree/nvim-web-devicons'}
         }
-    }
+    },
+    { 'axelvc/template-string.nvim' }
 }
