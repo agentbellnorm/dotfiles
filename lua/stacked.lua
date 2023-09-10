@@ -23,6 +23,11 @@ local function findCommonPrefix(paths)
         end
     end
 
+    local lastSlashPos = prefix:reverse():find("/")
+    if lastSlashPos then
+        prefix = prefix:sub(1, -lastSlashPos)
+    end
+
     return prefix
 end
 
