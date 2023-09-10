@@ -13,9 +13,22 @@ vim.api.nvim_exec([[
     augroup Stacked
         autocmd!
         autocmd BufEnter * lua require'stacked'.track_buffer()
+        autocmd BufDelete * lua require'stacked'.untrack_buffer()
     augroup END
 
 ]], false)
+
+M.untrack_buffer = function()
+    local cur_buf = vim.api.nvim_get_current_buf()
+    -- print("deleting buffer", cur_buf)
+
+    for i, buf in ipairs(buffer_list) do
+        if buf == cur_buf then
+            table.remove(buffer_list, i)
+            break
+        end
+    end
+end
 
 M.track_buffer = function()
     local cur_buf = vim.api.nvim_get_current_buf()
@@ -23,12 +36,11 @@ M.track_buffer = function()
     local buftype = vim.api.nvim_buf_get_option(cur_buf, 'buftype')
 
     if buftype ~= "" then
-        -- print("has a buftype so skipping", buftype)
+        -- print("has a buftype so skipping", buftype, cur_buf)
         return
     end
 
-    -- print("no buftype, add to list", buftype)
-
+    -- print("no buftype, add to list", buftype, cur_buf)
 
     for i, buf in ipairs(buffer_list) do
         if buf == cur_buf then
@@ -57,12 +69,14 @@ M.switch_buffer = function()
 
     vim.api.nvim_buf_set_lines(buf, 0, -1, false,
         map(buffer_list, function(buffer)
+            -- todo remove common characters
             return vim.api.nvim_buf_get_name(buffer)
         end)
     )
 
     local width = 80 -- todo length of longest path, or window width
     local height = #buffer_list
+
     local win_opts = {
         relative = "editor",
         width = width,
@@ -85,7 +99,6 @@ M.switch_buffer = function()
     vim.api.nvim_buf_set_keymap(buf, 'n', '<Esc>',
         ':lua require"stacked".close_popup()<CR>',
         { noremap = true, silent = true })
-    
 
     vim.api.nvim_buf_set_keymap(buf, 'n', '<TAB>', 'j', { noremap = true, silent = true })
 end
