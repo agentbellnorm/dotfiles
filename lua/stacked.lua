@@ -1,6 +1,7 @@
 local M = {}
 local buffer_list = {}
 
+-- BEGIN UTIL --
 local function map(tbl, func)
     local newTbl = {}
     for i, v in ipairs(tbl) do
@@ -8,6 +9,37 @@ local function map(tbl, func)
     end
     return newTbl
 end
+
+-- Find the longest common prefix of a list of strings
+local function findCommonPrefix(paths)
+    if #paths == 0 then return "" end
+
+    local prefix = paths[1]
+
+    for i = 2, #paths do
+        while not paths[i]:find("^" .. prefix) do
+            prefix = prefix:sub(1, -2) -- remove last character
+            if prefix == "" then return "" end
+        end
+    end
+
+    return prefix
+end
+
+local function removeCommonPrefix(paths)
+    local prefix = findCommonPrefix(paths)
+
+    if prefix == "" then return paths end
+
+    for i = 1, #paths do
+        paths[i] = paths[i]:sub(#prefix + 1)
+    end
+
+    return paths
+end
+
+-- END UTIL --
+
 
 vim.api.nvim_exec([[
     augroup Stacked
@@ -67,12 +99,14 @@ end
 M.switch_buffer = function()
     local buf = vim.api.nvim_create_buf(false, true)
 
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false,
-        map(buffer_list, function(buffer)
-            -- todo remove common characters
-            return vim.api.nvim_buf_get_name(buffer)
-        end)
-    )
+    local buffer_paths = map(buffer_list, function(buffer)
+        -- todo remove common characters
+        return vim.api.nvim_buf_get_name(buffer)
+    end)
+
+    buffer_paths = removeCommonPrefix(buffer_paths)
+
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, buffer_paths)
 
     local width = 80 -- todo length of longest path, or window width
     local height = #buffer_list
@@ -89,7 +123,7 @@ M.switch_buffer = function()
 
     local win = vim.api.nvim_open_win(buf, true, win_opts)
     if #buffer_list > 1 then
-        vim.api.nvim_win_set_cursor(win, {2, 0})
+        vim.api.nvim_win_set_cursor(win, { 2, 0 })
     end
 
     vim.api.nvim_buf_set_keymap(buf, 'n', '<Enter>',
