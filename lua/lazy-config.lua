@@ -29,3 +29,9 @@ require("Comment").setup({
 require'lspconfig'.lua_ls.setup{}
 
 require('gitsigns').setup()
+
+-- close quickfix (show references) menu after selecting choice
+vim.api.nvim_create_autocmd(
+  "FileType", {
+  pattern={"qf"},
+  command=[[nnoremap <buffer> <CR> <CR>:cclose<CR>]]})
