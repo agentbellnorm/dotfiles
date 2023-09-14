@@ -3,6 +3,7 @@
 [ ] refactor: https://github.com/ThePrimeagen/refactoring.nvim
 [ ] auto wrap lines
 [ ] auto update impors when moving file 
+[ ] rainbow parenthesis
 [x] refactor, rename
 [x] prettier
 [x] toggle comment
