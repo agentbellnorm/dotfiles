@@ -51,14 +51,15 @@ return {
     },
     { 'lewis6991/gitsigns.nvim' },
     { 'mg979/vim-visual-multi' },
-    {'jose-elias-alvarez/null-ls.nvim'},
-    {'MunifTanjim/prettier.nvim'},
-    {'nvim-treesitter/nvim-treesitter-context'},
+    { 'jose-elias-alvarez/null-ls.nvim' },
+    { 'MunifTanjim/prettier.nvim' },
+    { 'nvim-treesitter/nvim-treesitter-context' },
     {
-        'nvim-tree/nvim-tree.lua', 
+        'nvim-tree/nvim-tree.lua',
         dependencies = {
-            {'nvim-tree/nvim-web-devicons'}
+            { 'nvim-tree/nvim-web-devicons' }
         }
     },
-    { 'axelvc/template-string.nvim' }
+    { 'axelvc/template-string.nvim' },
+    { 'github/copilot.vim' }
 }
