@@ -10,6 +10,7 @@ lsp.ensure_installed({
     'lua_ls',
     'bashls',
     'pyright',
+    'biome',
 })
 
 local cmp = require("cmp")
