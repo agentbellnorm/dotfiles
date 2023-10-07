@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
 
--- move blocks around in visual mode 
+-- move blocks around in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
@@ -20,9 +20,9 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- yank to pbcopy
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- capital Q is not good aparently
 vim.keymap.set("n", "Q", "<nop>")
@@ -53,8 +53,8 @@ end)
 -- navigate back
 vim.keymap.set("n", "<leader>b", "<C-o>")
 
-vim.keymap.set("n", "<leader><TAB>", function() 
-    require"stacked".switch_buffer()
+vim.keymap.set("n", "<leader><TAB>", function()
+    require "stacked".switch_buffer()
 end)
 
 -- window movement
@@ -65,3 +65,7 @@ vim.keymap.set("n", "<leader>wh", "<C-w>h")
 
 -- split window vertically
 vim.keymap.set("n", "<leader>wv", "<C-w>v")
+
+-- error movement
+vim.keymap.set('n', '<leader>en', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+vim.keymap.set('n', '<leader>ep', '<cmd>lua vim.diagnostic.goto_next()<CR>')
