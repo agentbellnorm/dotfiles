@@ -114,7 +114,9 @@ M.switch_buffer = function()
 
     local buf = vim.api.nvim_create_buf(false, true)
 
-    local buffer_paths = map(buffer_list, vim.api.nvim_buf_get_name)
+    local buffer_paths = map(buffer_list, function(buffer)
+        return vim.api.nvim_buf_get_name(buffer)
+    end)
 
     buffer_paths = removeCommonPrefix(buffer_paths)
 
