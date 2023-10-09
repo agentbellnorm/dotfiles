@@ -70,8 +70,13 @@ end
 M.track_buffer = function()
     local cur_buf = vim.api.nvim_get_current_buf()
 
-    local buftype = vim.api.nvim_buf_get_option(cur_buf, 'buftype')
+    local bufname = vim.api.nvim_buf_get_name(cur_buf)
+    if bufname == "" then
+        -- print("not adding because bufname was ", bufname)
+        return
+    end
 
+    local buftype = vim.api.nvim_buf_get_option(cur_buf, 'buftype')
     if buftype ~= "" then
         -- print("has a buftype so skipping", buftype, cur_buf)
         return
@@ -102,12 +107,14 @@ M.select_buffer = function()
 end
 
 M.switch_buffer = function()
+    if #buffer_list == 0 then
+        print("No buffers to switch between")
+        return
+    end
+
     local buf = vim.api.nvim_create_buf(false, true)
 
-    local buffer_paths = map(buffer_list, function(buffer)
-        -- todo remove common characters
-        return vim.api.nvim_buf_get_name(buffer)
-    end)
+    local buffer_paths = map(buffer_list, vim.api.nvim_buf_get_name)
 
     buffer_paths = removeCommonPrefix(buffer_paths)
 
