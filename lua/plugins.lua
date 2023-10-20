@@ -61,5 +61,6 @@ return {
         }
     },
     { 'axelvc/template-string.nvim' },
-    { 'github/copilot.vim' }
+    { 'github/copilot.vim' },
+    { 'nvim-lualine/lualine.nvim' }
 }

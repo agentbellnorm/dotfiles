@@ -53,9 +53,9 @@ end)
 -- navigate back
 vim.keymap.set("n", "<leader>b", "<C-o>")
 
-vim.keymap.set("n", "<leader><TAB>", function()
-    require "stacked".switch_buffer()
-end)
+-- vim.keymap.set("n", "<leader><TAB>", function()
+--     require "stacked".switch_buffer()
+-- end)
 
 -- window movement
 vim.keymap.set("n", "<leader>wk", "<C-w>k")
