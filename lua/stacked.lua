@@ -28,6 +28,8 @@ local function findCommonPrefix(paths)
         prefix = prefix:sub(1, -lastSlashPos)
     end
 
+    print('prefix was', prefix)
+
     return prefix
 end
 

@@ -13,7 +13,14 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup('plugins')
 
-require("telescope").setup()
+require("telescope").setup({
+    pickers = {
+        buffers = {
+            sort_mru = true,
+            ignore_current_buffer = true,
+        }
+    }
+})
 
 require("Comment").setup({
     toggler = {
@@ -38,3 +45,5 @@ vim.api.nvim_create_autocmd(
     })
 
 require('template-string').setup({ remove_template_string = true })
+
+require('lualine').setup()

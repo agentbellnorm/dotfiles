@@ -11,6 +11,7 @@ lsp.ensure_installed({
     'bashls',
     'pyright',
     'biome',
+    'jdtls'
 })
 
 local cmp = require("cmp")
