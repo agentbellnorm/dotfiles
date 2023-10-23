@@ -62,5 +62,15 @@ return {
     },
     { 'axelvc/template-string.nvim' },
     { 'github/copilot.vim' },
-    { 'nvim-lualine/lualine.nvim' }
+    { 'nvim-lualine/lualine.nvim' },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("refactoring").setup()
+        end,
+    },
 }
