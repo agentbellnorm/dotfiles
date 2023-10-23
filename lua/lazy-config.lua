@@ -18,6 +18,10 @@ require("telescope").setup({
         buffers = {
             sort_mru = true,
             ignore_current_buffer = true,
+            layout_strategy = "vertical",
+            layout_config = {
+                mirror = true
+            }
         }
     }
 })
