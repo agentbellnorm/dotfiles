@@ -11,7 +11,9 @@ lsp.ensure_installed({
     'bashls',
     'pyright',
     'biome',
-    'jdtls'
+    'jdtls',
+    'html',
+    'wgsl_analyzer',
 })
 
 local cmp = require("cmp")
@@ -60,3 +62,6 @@ require('lspconfig').tsserver.setup({
   end
 })
 
+vim.cmd([[
+    au BufNewFile,BufRead *.wgsl set filetype=wgsl
+]])
