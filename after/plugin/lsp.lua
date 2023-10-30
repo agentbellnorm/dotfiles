@@ -39,10 +39,13 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', '<leader>e', function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
-    -- extract variable, inline variable etc
+    -- code action
     vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
     -- show references
     vim.keymap.set('n', 'F', function() require('telescope.builtin').lsp_references() end,
+        { noremap = true, silent = true, buffer = bufnr })
+    -- search in buffer
+    vim.keymap.set('n', '<leader>/', function() require('telescope.builtin').current_buffer_fuzzy_find() end,
         { noremap = true, silent = true, buffer = bufnr })
     -- rename variable
     vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
