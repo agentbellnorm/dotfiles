@@ -73,4 +73,5 @@ return {
             require("refactoring").setup()
         end,
     },
+    { 'LunarWatcher/auto-pairs' },
 }
