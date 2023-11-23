@@ -21,8 +21,8 @@ if vim.g.neovide then
     vim.g.neovide_background_color = "#0f1117" .. alpha()
 
     -- ANIMATION LENGTH
-    vim.g.neovide_scroll_animation_length = 0.3
-
+    vim.g.neovide_scroll_animation_length = 0.1
+    vim.g.neovide_cursor_animation_length = 0.04
     -- HIDE MOUSE
     vim.g.neovide_hide_mouse_when_typing = true
 
@@ -36,4 +36,3 @@ vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true 
 vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<D-v>', '<C-O>:set paste<CR><C-R>+<C-O>:set nopaste<CR>', { noremap = true, silent = true })
-
