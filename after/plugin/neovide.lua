@@ -21,8 +21,8 @@ if vim.g.neovide then
     vim.g.neovide_background_color = "#0f1117" .. alpha()
 
     -- ANIMATION LENGTH
-    vim.g.neovide_scroll_animation_length = 0.1
-    vim.g.neovide_cursor_animation_length = 0.04
+    vim.g.neovide_scroll_animation_length = 0.02
+    vim.g.neovide_cursor_animation_length = 0.02
     -- HIDE MOUSE
     vim.g.neovide_hide_mouse_when_typing = true
 
