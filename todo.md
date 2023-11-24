@@ -1,9 +1,10 @@
 
 ## todo
-[ ] refactor: https://github.com/ThePrimeagen/refactoring.nvim
+[x] refactor: https://github.com/ThePrimeagen/refactoring.nvim
 [ ] auto wrap lines
 [ ] auto update impors when moving file 
 [ ] rainbow parenthesis
+[ ] Inline git diff (compare local changes with HEAD in the buffer)
 [x] refactor, rename
 [x] prettier
 [x] toggle comment
