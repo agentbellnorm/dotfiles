@@ -52,7 +52,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
     -- code action
-    vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set('n', '<leader>a', function() vim.lsp.buf.code_action() end, opts)
     -- show references
     vim.keymap.set('n', 'F', function() require('telescope.builtin').lsp_references() end,
         { noremap = true, silent = true, buffer = bufnr })

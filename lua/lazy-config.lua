@@ -13,19 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup('plugins')
 
-require("telescope").setup({
-    pickers = {
-        buffers = {
-            sort_mru = true,
-            ignore_current_buffer = true,
-            layout_strategy = "vertical",
-            layout_config = {
-                mirror = true
-            }
-        }
-    }
-})
-
 require("Comment").setup({
     toggler = {
         line = '<leader>c',

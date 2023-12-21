@@ -10,8 +10,23 @@ vim.keymap.set('n', '<leader><TAB>', builtin.buffers, {})
 
 -- For telescope-ui-select: https://github.com/nvim-telescope/telescope-ui-select.nvim
 
--- This is your opts table
 require("telescope").setup {
+  pickers = {
+    buffers = {
+      sort_mru = true,
+      ignore_current_buffer = true,
+      layout_strategy = "vertical",
+      layout_config = {
+        mirror = true
+      }
+    },
+    lsp_references = {
+      layout_strategy = "vertical",
+      layout_config = {
+        -- mirror = true
+      }
+    },
+  },
   extensions = {
     ["ui-select"] = {
       require("telescope.themes").get_dropdown {}
