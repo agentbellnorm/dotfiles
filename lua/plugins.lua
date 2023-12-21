@@ -4,6 +4,7 @@ return {
         tag = '0.1.2',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
+    { 'nvim-telescope/telescope-ui-select.nvim' },
     {
         'rose-pine/neovim',
         name = 'rose-pine',
