@@ -49,7 +49,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', '<leader>/', function() require('telescope.builtin').current_buffer_fuzzy_find() end,
         { noremap = true, silent = true, buffer = bufnr })
     -- rename variable
-    vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set('n', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
 end)
 
