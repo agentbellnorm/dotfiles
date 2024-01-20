@@ -23,9 +23,21 @@ require("telescope").setup {
     lsp_references = {
       layout_strategy = "vertical",
       layout_config = {
-        -- mirror = true
+        mirror = true
       }
     },
+    lsp_definitions = {
+      layout_strategy = "vertical",
+      layout_config = {
+        mirror = true
+      }
+    },
+    lsp_implementations = {
+      layout_strategy = "vertical",
+      layout_config = {
+        mirror = true
+      }
+    }
   },
   extensions = {
     ["ui-select"] = {

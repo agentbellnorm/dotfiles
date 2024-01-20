@@ -33,7 +33,8 @@ lsp.setup_nvim_cmp({
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
-    vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+    vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, opts)
+    vim.keymap.set('n', 'gi', function() require('telescope.builtin').lsp_implementations() end, opts)
     vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
     -- open error, full error message
