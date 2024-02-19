@@ -43,8 +43,18 @@ local root_has_file = function(...)
   return false
 end
 
-local eslint_root_files = { ".eslintrc", ".eslintrc.js", ".eslintrc.json" }
-local prettier_root_files = { ".prettierrc", ".prettierrc.js", ".prettierrc.json" }
+local eslint_root_files = { 
+  ".eslintrc",
+  ".eslintrc.js",
+  ".eslintrc.json"
+}
+
+local prettier_root_files = {
+  ".prettierrc",
+  ".prettierrc.js",
+  ".prettierrc.json",
+  "prettier.config.js"
+}
 
 local M = {}
 
@@ -54,6 +64,10 @@ end
 
 M.is_prettier = function()
   return root_has_file(prettier_root_files) and not M.is_eslint()
+end
+
+M.is_eslint_or_prettier = function()
+  return M.is_prettier() or M.is_eslint()
 end
 
 return M
