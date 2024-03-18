@@ -1,6 +1,7 @@
 local lsp = require("lsp-zero")
 local lspconfig = require("lspconfig")
 local js_helpers = require("js-helpers")
+local java = require('java')
 
 lsp.preset('recommended')
 
@@ -69,6 +70,9 @@ lsp.on_attach(function(client, bufnr)
     end, opts)
   end
 end)
+
+java.setup()
+lspconfig.jdtls.setup({})
 
 lsp.setup()
 
