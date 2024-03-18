@@ -1,5 +1,5 @@
-# Morgans nvim config
-This is my noob config. I mostly write TypeScript and Rust at the moment.
+# My nvim config
+This is my config. I mostly write TypeScript and Rust at the moment.
 
 I have mostly used both IntelliJ and VSCode in the past.
 
