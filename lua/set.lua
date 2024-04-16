@@ -1,10 +1,11 @@
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 2 
-vim.opt.softtabstop = 2 
-vim.opt.shiftwidth = 2 
+local spaces = 4
+
+vim.opt.tabstop = spaces
+vim.opt.softtabstop = spaces
+vim.opt.shiftwidth = spaces
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
