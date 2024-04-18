@@ -32,3 +32,5 @@ vim.opt.colorcolumn = "100"
 
 vim.g.mapleader = " "
 vim.g.copilot_assume_mapped = true
+
+vim.opt.clipboard="unnamedplus"
