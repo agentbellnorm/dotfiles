@@ -37,6 +37,4 @@ vim.api.nvim_create_autocmd(
 
 require('template-string').setup({ remove_template_string = true })
 
-require('lualine').setup()
-
 require("ibl").setup()

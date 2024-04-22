@@ -12,4 +12,5 @@
 [x] stack file navigation
 [x] terminal (not with vim)
 [x] find usages
-[ ] take visually selected string and take it to live-grep
+[x] take visually selected string and take it to live-grep
+[x] show relative filepath in lualine

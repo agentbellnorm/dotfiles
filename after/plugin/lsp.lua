@@ -64,7 +64,6 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
 
     if client.supports_method("textDocument/formatting") and not js_helpers.is_eslint_or_prettier() then
-        print("format!!")
         vim.keymap.set("n", "<leader>f", function()
             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
         end, opts)
