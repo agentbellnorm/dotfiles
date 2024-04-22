@@ -36,6 +36,7 @@ return {
     { 'nvim-treesitter/nvim-treesitter',        build = ':TSUpdate' },
     { 'mbbill/undotree' },
     { 'tpope/vim-fugitive' },
+    { 'sindrets/diffview.nvim' },
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
