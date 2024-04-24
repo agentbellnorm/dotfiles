@@ -1,6 +1,13 @@
 require('lualine').setup({
     options = {
-        ignore_focus = { 'NvimTree', 'fugitive', 'undotree', 'TelescopePrompt', 'DiffviewFiles' },
+        ignore_focus = {
+            'NvimTree',
+            'fugitive',
+            'fugitiveblame',
+            'undotree',
+            'TelescopePrompt',
+            'DiffviewFiles',
+        },
         globalstatus = true,
     },
     sections = {
