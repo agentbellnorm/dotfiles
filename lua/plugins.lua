@@ -96,7 +96,11 @@ return {
             require("refactoring").setup()
         end,
     },
-    { 'LunarWatcher/auto-pairs' },
+    {
+      'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      config = true
+    },
     { 'HiPhish/rainbow-delimiters.nvim' },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 }
