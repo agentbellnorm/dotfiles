@@ -34,6 +34,7 @@ return {
         end
     },
     { 'nvim-treesitter/nvim-treesitter',        build = ':TSUpdate' },
+    { 'windwp/nvim-ts-autotag' },
     { 'mbbill/undotree' },
     { 'tpope/vim-fugitive' },
     { 'sindrets/diffview.nvim' },
