@@ -33,6 +33,7 @@ return {
             vim.cmd('colorscheme rose-pine')
         end
     },
+    {'itchyny/vim-cursorword'},
     { 'nvim-treesitter/nvim-treesitter',        build = ':TSUpdate' },
     { 'windwp/nvim-ts-autotag' },
     { 'mbbill/undotree' },
@@ -43,14 +44,14 @@ return {
         branch = 'v2.x',
         dependencies = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },       -- Required
-            { 'williamboman/mason.nvim' },     -- Optional
+            { 'neovim/nvim-lspconfig' },             -- Required
+            { 'williamboman/mason.nvim' },           -- Optional
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
         }
     },
     { 'hrsh7th/cmp-nvim-lsp-signature-help' },
@@ -98,9 +99,9 @@ return {
         end,
     },
     {
-      'windwp/nvim-autopairs',
-      event = "InsertEnter",
-      config = true
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        config = true
     },
     { 'HiPhish/rainbow-delimiters.nvim' },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
