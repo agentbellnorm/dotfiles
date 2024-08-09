@@ -19,7 +19,7 @@ local function my_on_attach(bufnr)
     api.config.mappings.default_on_attach(bufnr)
 
     -- custom mappings
-    vim.keymap.set('n', '<leader>gr', grep_at_current_tree_node, opts('grep'))
+    vim.keymap.set('n', '<leader>pg', grep_at_current_tree_node, opts('grep'))
 end
 
 -- pass to setup along with your other options
