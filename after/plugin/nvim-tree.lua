@@ -1,34 +1,37 @@
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
+local function grep_at_current_tree_node()
+    local node = require('nvim-tree.lib').get_node_at_cursor()
+    if not node then return end
+    require('telescope.builtin').live_grep({ search_dirs = { node.absolute_path } })
+end
+
 -- empty setup using defaults
 local function my_on_attach(bufnr)
-  local api = require "nvim-tree.api"
+    local api = require "nvim-tree.api"
 
-  local function opts(desc)
-    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
+    local function opts(desc)
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
 
-  -- default mappings
-  api.config.mappings.default_on_attach(bufnr)
+    -- default mappings
+    api.config.mappings.default_on_attach(bufnr)
 
-  -- custom mappings
-  -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-  -- vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+    -- custom mappings
+    vim.keymap.set('n', '<leader>gr', grep_at_current_tree_node, opts('grep'))
 end
 
 -- pass to setup along with your other options
 require("nvim-tree").setup {
-  ---
-  on_attach = my_on_attach,
-  git = {
-      ignore = false,
-  },
-  update_focused_file = {
-      enable = true
-  },
-  view = {
-      width = 40
-  }
-  --
+    on_attach = my_on_attach,
+    git = {
+        ignore = false,
+    },
+    update_focused_file = {
+        enable = true
+    },
+    view = {
+        width = 40,
+    }
 }
