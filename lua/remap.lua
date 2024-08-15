@@ -66,3 +66,7 @@ vim.keymap.set("n", "<leader>wv", "<C-w>v")
 -- error movement
 vim.keymap.set('n', '<leader>en', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 vim.keymap.set('n', '<leader>ep', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+
+-- jq
+vim.keymap.set("n", "<leader>jq", "<Cmd>%!jq<CR> | :set filetype=json<CR>", { noremap = true, silent = true })
+vim.keymap.set("v", "<leader>jq", ":'<,'>!jq<CR>", { noremap = true, silent = true })

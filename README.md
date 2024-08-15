@@ -11,5 +11,9 @@ brew install ripgrep
 ```
 
 ```sh
+brew install jq
+```
+
+```sh
 npm install -g @fsouza/prettierd
 ```
