@@ -1,0 +1,53 @@
+# vim: set filetype=sh:
+
+HOMEBREW_NO_AUTO_UPDATE=1
+alias gs='git status'
+alias gl='git log'
+alias uncommit='git reset --soft HEAD~'
+alias unstage='git restore --staged'
+alias subu='git submodule update --init --recursive'
+alias pp='git pull --rebase origin master && git fetch origin && git submodule update --init --recursive'
+alias gc-='git checkout -'
+alias gcb='git checkout -b'
+alias gc.='git checkout .'
+alias gap='git add -p'
+alias gcam='git add . && git commit -m'
+alias gpuo='git push -u origin $(git branch --show-current)'
+alias gcasm='git add . && git commit -s -m'
+alias hs='history | grep'
+alias f='find . -iname'
+alias y='yarn'
+alias yt='yarn test'
+alias ys='yarn start'
+alias s='source ~/.zshrc'
+alias vim='neovide --frame=none'
+alias rc='vim ~/.zshrc'
+alias aliases='vim ~/kod/shell-aliases/aliases'
+alias notes='nvim ~/notes.txt'
+alias rust='evcxr'
+alias ctr='cargo test --release'
+alias vconfig='vim ~/.config/nvim'
+alias json='pbpaste | jq > ~/kod/slask.json && vim ~/kod/slask.json'
+
+
+findandkill() {  
+    pid=$(lsof -n -i4TCP:$1 | grep LISTEN | awk '{ print $2 }')
+    echo "killing pid $port"
+    kill -9 $pid
+}
+alias killport=findandkill
+
+make-gif () {
+    ffmpeg -i $1 -vf "fps=10,scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 $2
+}
+
+unalias gcm >/dev/null 2>/dev/null
+gcm () {
+    if git show-ref --verify --quiet refs/heads/master; then
+        git checkout master
+    elif git show-ref --verify --quiet refs/heads/main; then
+        git checkout main
+    else
+        echo "Neither master nor main exists."
+    fi
+}
