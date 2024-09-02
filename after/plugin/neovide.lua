@@ -33,6 +33,9 @@ if vim.g.neovide then
 
   -- aa
   vim.g.neovide_cursor_antialiasing = true
+
+  -- window-bar
+  vim.g.neovide_frame = "none"
 end
 
 -- Allow clipboard copy paste in neovim
