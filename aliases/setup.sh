@@ -2,8 +2,6 @@
 
 COMMAND="source $(pwd)/aliases"
 
-echo "$COMMAND"
-
 if grep -Fxq "$COMMAND" ~/.zshrc; then
   echo "aliases already sourced in rc, not doing anything"
   exit 0
