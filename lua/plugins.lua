@@ -4,27 +4,7 @@ return {
         tag = '0.1.2',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    -- {
-    --     'nvim-java/nvim-java',
-    --     dependencies = {
-    --         'nvim-java/lua-async-await',
-    --         'nvim-java/nvim-java-core',
-    --         'nvim-java/nvim-java-test',
-    --         'nvim-java/nvim-java-dap',
-    --         'MunifTanjim/nui.nvim',
-    --         'neovim/nvim-lspconfig',
-    --         'mfussenegger/nvim-dap',
-    --         {
-    --             'williamboman/mason.nvim',
-    --             opts = {
-    --                 registries = {
-    --                     'github:nvim-java/mason-registry',
-    --                     'github:mason-org/mason-registry',
-    --                 },
-    --             },
-    --         }
-    --     },
-    -- },
+    { 'nvim-java/nvim-java' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     {
         'rose-pine/neovim',
@@ -33,8 +13,8 @@ return {
             vim.cmd('colorscheme rose-pine')
         end
     },
-    {'itchyny/vim-cursorword'},
-    { 'nvim-treesitter/nvim-treesitter',        build = ':TSUpdate' },
+    { 'itchyny/vim-cursorword' },
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
     { 'windwp/nvim-ts-autotag' },
     { 'mbbill/undotree' },
     { 'tpope/vim-fugitive' },
@@ -105,4 +85,8 @@ return {
     },
     { 'HiPhish/rainbow-delimiters.nvim' },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    {
+        'stevearc/conform.nvim',
+        opts = {},
+    }
 }
