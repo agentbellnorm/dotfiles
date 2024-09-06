@@ -189,12 +189,18 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
+# Move to workspace
+
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
 run = ['move-node-to-workspace B']
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
+run = "move-node-to-workspace B"
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
 run = "move-node-to-workspace B"
 
 [[on-window-detected]]
@@ -214,10 +220,16 @@ if.app-id = 'com.spotify.client'
 run = "move-node-to-workspace M"
 
 [[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace S'
+
+# Floating
+
+[[on-window-detected]]
 if.app-id = 'com.googlecode.iterm2'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace S'
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
 
