@@ -1,45 +1,13 @@
-local lsp = require("lsp-zero")
+-- Load lsp-zero and required modules
+local lsp_zero = require("lsp-zero")
 local lspconfig = require("lspconfig")
-local js_helpers = require("js-helpers")
-
-lsp.preset("recommended")
-
--- available servers: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
-lsp.ensure_installed({
-	"ts_ls",
-	"eslint",
-	"rust_analyzer",
-	"lua_ls",
-	"bashls",
-	"pyright",
-	"biome",
-	"jdtls",
-	"html",
-	"wgsl_analyzer",
-})
-
 local cmp = require("cmp")
-local cmp_format = lsp.cmp_format({ details = true })
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-	["<CR>"] = cmp.mapping.confirm({ select = true }),
-	["<C-Space"] = cmp.mapping.complete(),
-	["<Tab>"] = cmp.mapping(function(fallback)
-		fallback()
-	end, { "i", "s" }),
-})
 
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings,
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "nvim_lsp_signature_help" },
-	},
-	formatting = cmp_format,
-})
+-- Setup lsp_zero with new extend_lspconfig and on_attach function
+local lsp_attach = function(client, bufnr)
+	-- Apply default keymaps for LSP
+	lsp_zero.default_keymaps({ buffer = bufnr })
 
-lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set("n", "gd", function()
@@ -91,11 +59,65 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("x", "<leader>f", function()
 		require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
 	end, opts)
-end)
+end
 
-lsp.setup()
+-- Setup nvim-lspconfig
+lsp_zero.extend_lspconfig({
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	lsp_attach = lsp_attach,
+	float_border = "rounded",
+	sign_text = true,
+})
 
--- disable autoformatting with tsserver, (using prettier/eslint instead)
+-- Mason setup for automatic server install
+require("mason").setup({})
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"tsserver",
+		"eslint",
+		"rust_analyzer",
+		"lua_ls",
+		"bashls",
+		"pyright",
+		"biome",
+		"jdtls",
+		"html",
+		"wgsl_analyzer",
+	},
+	handlers = {
+		function(server_name)
+			if server_name == "tsserver" then
+				server_name = "ts_ls"
+			end
+
+			require("lspconfig")[server_name].setup({})
+		end,
+		-- Exclude jdtls auto configuration (example)
+		-- jdtls = lsp_zero.noop,
+	},
+})
+
+-- Setup nvim-cmp for autocompletion
+local cmp_format = require("lsp-zero").cmp_format({ details = true })
+cmp.setup({
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Scroll up docs
+		["<C-d>"] = cmp.mapping.scroll_docs(4), -- Scroll down docs
+		["<Tab>"] = cmp.mapping(function(fallback)
+			fallback()
+		end, { "i", "s" }),
+	}),
+	formatting = cmp_format,
+})
+
+-- Specific server configuration (e.g., tsserver autoformatting off)
 lspconfig.ts_ls.setup({
 	on_init = function(client)
 		client.server_capabilities.documentFormattingProvider = false
@@ -103,6 +125,7 @@ lspconfig.ts_ls.setup({
 	end,
 })
 
+-- Set filetype for wgsl
 vim.cmd([[
-    au BufNewFile,BufRead *.wgsl set filetype=wgsl
-    ]])
+  au BufNewFile,BufRead *.wgsl set filetype=wgsl
+]])

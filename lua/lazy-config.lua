@@ -1,40 +1,38 @@
+-- Setup lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
-end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup('plugins')
+local ok, lazy = pcall(require, "lazy")
+
+if not ok then
+	local msg = "You need to install the plugin manager lazy.nvim\n" .. "in this folder: " .. lazypath
+	print(msg)
+	return
+end
+
+lazy.setup("plugins")
 
 require("Comment").setup({
-    toggler = {
-        line = '<leader>c',
-        -- block = '<leader>bc',
-    },
-    opleader = {
-        line = '<leader>c',
-        -- block = '<leader>bc', -- slows down <leader>b for backing
-    },
+	toggler = {
+		line = "<leader>c",
+		-- block = '<leader>bc',
+	},
+	opleader = {
+		line = "<leader>c",
+		-- block = '<leader>bc', -- slows down <leader>b for backing
+	},
 })
 
-require 'lspconfig'.lua_ls.setup {}
+require("lspconfig").lua_ls.setup({})
 
-require('gitsigns').setup()
+require("gitsigns").setup()
 
 -- close quickfix (show references) menu after selecting choice
-vim.api.nvim_create_autocmd(
-    "FileType", {
-        pattern = { "qf" },
-        command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
-    })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "qf" },
+	command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]],
+})
 
-require('template-string').setup({ remove_template_string = true })
+require("template-string").setup({ remove_template_string = true })
 
 require("ibl").setup()

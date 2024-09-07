@@ -21,7 +21,7 @@ return {
     { 'sindrets/diffview.nvim' },
     {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
+        branch = 'v4.x',
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },             -- Required
@@ -56,7 +56,6 @@ return {
     },
     { 'lewis6991/gitsigns.nvim' },
     { 'mg979/vim-visual-multi' },
-    { 'jose-elias-alvarez/null-ls.nvim' },
     { 'MunifTanjim/prettier.nvim' },
     { 'nvim-treesitter/nvim-treesitter-context' },
     {
@@ -85,8 +84,5 @@ return {
     },
     { 'HiPhish/rainbow-delimiters.nvim' },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-    {
-        'stevearc/conform.nvim',
-        opts = {},
-    }
+    { 'stevearc/conform.nvim', opts = {} }
 }
