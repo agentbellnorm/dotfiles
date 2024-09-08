@@ -35,6 +35,7 @@ return {
         }
     },
     { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
     {
         "Pocco81/auto-save.nvim",
         config = function()
