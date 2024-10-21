@@ -22,20 +22,24 @@ alias ys='yarn start'
 alias s='source ~/.zshrc'
 alias vim='neovide --frame=transparent --title-hidden --fork'
 alias rc='vim ~/.zshrc'
-alias aliases='vim ~/kod/shell-aliases/aliases'
+alias aliases='vim ~/kod/dotfiles/aliases'
 alias notes='nvim ~/notes.txt'
 alias rust='evcxr'
 alias ctr='cargo test --release'
 alias vconfig='vim ~/.config/nvim'
 alias json='pbpaste | jq > ~/kod/slask.json && vim ~/kod/slask.json'
 
-
-findandkill() {  
-    pid=$(lsof -n -i4TCP:$1 | grep LISTEN | awk '{ print $2 }')
-    echo "killing pid $port"
-    kill -9 $pid
+ip () {
+    ifconfig | grep "inet " | grep -v 127.0.0.1 | awk "{print $2}"
 }
-alias killport=findandkill
+
+killport () {  
+    pid=$(lsof -n -i4TCP:"$1" | grep LISTEN | awk "{ print $2 }")
+    echo "the port is used by:"
+    ps -p "$pid"
+    echo "killing pid $pid"
+    kill -9 "$pid"
+}
 
 make-gif () {
     ffmpeg -i $1 -vf "fps=10,scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 $2
