@@ -56,3 +56,12 @@ gcm () {
         echo "Neither master nor main exists."
     fi
 }
+
+ns () {
+    if kubectl get namespace "$1" >/dev/null 2>&1; then
+        kubectl config set-context --current --namespace="$1"
+        echo "Namespace set to '$1'."
+    else
+        echo "Namespace '$1' does not exist in the cluster."
+    fi
+}
