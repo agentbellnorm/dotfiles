@@ -23,7 +23,7 @@ alias ys='yarn start'
 alias s='source ~/.zshrc'
 alias vim='neovide --frame=transparent --title-hidden --fork'
 alias rc='vim ~/.zshrc'
-alias aliases='vim ~/kod/dotfiles/aliases'
+alias aliases='vim ~/kod/dotfiles/aliases/aliases'
 alias notes='nvim ~/notes.txt'
 alias rust='evcxr'
 alias ctr='cargo test --release'
@@ -31,15 +31,19 @@ alias vconfig='vim ~/.config/nvim'
 alias json='pbpaste | jq > ~/kod/slask.json && vim ~/kod/slask.json'
 
 ip () {
-    ifconfig | grep "inet " | grep -v 127.0.0.1 | awk "{print $2}"
+    ifconfig | grep "inet " | grep -v 127.0.0.1 | grep 192 | awk '{print $2}'
 }
 
 killport () {  
-    pid=$(lsof -n -i4TCP:"$1" | grep LISTEN | awk "{ print $2 }")
-    echo "the port is used by:"
-    ps -p "$pid"
-    echo "killing pid $pid"
-    kill -9 "$pid"
+    pid=$(lsof -ti ":$1")
+    if [ -z "$pid" ]; then
+        echo "no one is using port $1"
+    else
+        echo "port $1 is used by:"
+        ps -p "$pid"
+        echo "killing pid $pid"
+        kill -9 "$pid"
+    fi
 }
 
 make-gif () {
@@ -64,4 +68,8 @@ ns () {
     else
         echo "Namespace '$1' does not exist in the cluster."
     fi
+}
+
+gcr() {
+    git reflog | grep "checkout:" | awk '{print $NF}' | uniq | fzf --prompt="Select a branch: " --height=10 --reverse | xargs git checkout
 }
