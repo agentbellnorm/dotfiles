@@ -4,7 +4,6 @@ return {
         tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    { 'nvim-java/nvim-java' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     {
         'rose-pine/neovim',
