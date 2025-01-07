@@ -23,8 +23,6 @@ require("Comment").setup({
 	},
 })
 
-require("lspconfig").lua_ls.setup({})
-
 require("gitsigns").setup()
 
 -- close quickfix (show references) menu after selecting choice
