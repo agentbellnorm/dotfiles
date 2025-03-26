@@ -34,4 +34,11 @@ vim.opt.colorcolumn = "100"
 vim.g.mapleader = " "
 vim.g.copilot_assume_mapped = true
 
-vim.opt.clipboard="unnamedplus"
+vim.opt.clipboard = "unnamedplus"
+vim.diagnostic.config({
+	virtual_text = true,
+	virtual_lines = {
+		 -- Only show virtual line diagnostics for the current cursor line
+		current_line = true,
+	},
+})

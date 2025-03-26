@@ -8,7 +8,7 @@ if vim.g.neovide then
   vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli')   -- Paste insert mode
 
   -- FONT
-  vim.o.guifont = "Hack Nerd Font Mono:h16"   -- text below applies for VimScript
+  vim.o.guifont = "Hack Nerd Font Mono:h14"   -- text below applies for VimScript
 
   -- TRANSPARENCY
 
