@@ -241,6 +241,10 @@ if.app-id = 'com.todesktop.230313mzl4w4u92'
 run = "move-node-to-workspace C"
 
 [[on-window-detected]]
+if.app-id = 'com.sublimetext.4'
+run = "move-node-to-workspace C"
+
+[[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = "move-node-to-workspace M"
 
@@ -264,5 +268,9 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Preview'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.nightly'
 run = 'layout floating'
 
