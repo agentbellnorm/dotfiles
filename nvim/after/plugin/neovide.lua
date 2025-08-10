@@ -15,8 +15,8 @@ if vim.g.neovide then
   local alpha = function()
     return string.format("%x", math.floor((255 * vim.g.transparency) or 0.9))
   end
-  -- g:neovide_transparency should be 0 if you want to unify transparency of content and title bar.
-  vim.g.neovide_transparency = 0.88
+  -- g:neovide_opacity should be 0 if you want to unify transparency of content and title bar.
+  vim.g.neovide_opacity = 0.88
   vim.g.transparency = 0.88
   vim.g.neovide_window_blurred = true
   -- vim.g.neovide_background_color = "#0f1117" .. alpha()
@@ -27,7 +27,7 @@ if vim.g.neovide then
 
   -- ANIMATION LENGTH
   vim.g.neovide_scroll_animation_length = 0.02
-  vim.g.neovide_cursor_animation_length = 0.02
+  vim.g.neovide_cursor_animation_length = 0.04
   -- HIDE MOUSE
   vim.g.neovide_hide_mouse_when_typing = true
 
