@@ -274,3 +274,11 @@ run = 'layout floating'
 if.app-id = 'org.mozilla.nightly'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'NULL-APP-BUNDLE-ID'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.dmitrynikolaev.numi'
+run = 'layout floating'
+
