@@ -79,7 +79,6 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"bashls",
 		"pyright",
-		"biome",
 		"jdtls",
 		"html",
 		"wgsl_analyzer",
