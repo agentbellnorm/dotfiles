@@ -1,4 +1,4 @@
-local js_ts_formatters = { "eslint_d", "eslint", "prettierd", "prettier", stop_after_first = true }
+local js_ts_formatters = { "prettierd", "eslint_d", "eslint", "prettier", stop_after_first = true }
 
 require("conform").setup({
 	async = true,
