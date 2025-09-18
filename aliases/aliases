@@ -1,5 +1,8 @@
 # vim: set filetype=sh:
 
+export LC_CTYPE=$LANG
+
+
 HOMEBREW_NO_AUTO_UPDATE=1
 alias gs='git status'
 alias gl='git log'
