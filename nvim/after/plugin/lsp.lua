@@ -82,7 +82,7 @@ require("mason-lspconfig").setup({
 		"jdtls",
 		"html",
 		"wgsl_analyzer",
-        "tailwindcss",
+		"tailwindcss",
 	},
 	handlers = {
 		function(server_name)
@@ -102,6 +102,7 @@ require("mason-lspconfig").setup({
 				end,
 			})
 		end,
+		rust_analyzer = function() end, -- handled by rustaceanvim
 	},
 })
 

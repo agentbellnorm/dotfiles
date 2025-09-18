@@ -45,8 +45,12 @@ return {
             }
         end
     },
-    { "neovim/nvim-lspconfig" },
-    { 'simrat39/rust-tools.nvim' },
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^5', -- Recommended
+        lazy = false, -- This plugin is already lazy
+        ft = { 'rust' },
+    },
     {
         'numToStr/Comment.nvim',
         opts = {
