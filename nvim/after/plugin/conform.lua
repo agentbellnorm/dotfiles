@@ -16,6 +16,7 @@ require("conform").setup({
 		json = { "prettierd", "prettier", stop_after_first = true },
 		graphql = { "prettierd", "prettier", stop_after_first = true },
 		java = { "google-java-format" },
+		go = { "goimports", "gofmt" },
 	},
 	formatters = {
 		eslint_d = {

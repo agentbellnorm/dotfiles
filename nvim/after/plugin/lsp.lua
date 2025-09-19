@@ -83,6 +83,7 @@ require("mason-lspconfig").setup({
 		"html",
 		"wgsl_analyzer",
 		"tailwindcss",
+		"gopls",
 	},
 	handlers = {
 		function(server_name)
