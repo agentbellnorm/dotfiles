@@ -22,19 +22,21 @@ require("telescope").setup {
             }
         },
         find_files = {
+            hidden = true,
             layout_strategy = "vertical",
             layout_config = {
                 mirror = true
             }
         },
         live_grep = {
+            additional_args = { "--hidden" },
             layout_strategy = "vertical",
-
             layout_config = {
                 mirror = true
             }
         },
         grep_string = {
+            additional_args = { "--hidden" },
             layout_strategy = "vertical",
             layout_config = {
                 mirror = true
