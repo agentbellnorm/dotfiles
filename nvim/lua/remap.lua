@@ -73,3 +73,6 @@ vim.keymap.set("v", "<leader>jq", ":'<,'>!jq<CR>", { noremap = true, silent = tr
 
 -- gitsigns
 vim.keymap.set("n", "<leader>gh", "<cmd>Gitsigns preview_hunk<CR>")
+
+-- diffview
+vim.keymap.set("n", "<leader>gf", "<cmd>DiffviewFileHistory %<CR>")
