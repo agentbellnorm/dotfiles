@@ -9,7 +9,7 @@ alias gl='git log'
 alias uncommit='git reset --soft HEAD~'
 alias unstage='git restore --staged'
 alias subu='git submodule update --init --recursive'
-alias pp='git pull --rebase origin master && git fetch origin && git submodule update --init --recursive'
+alias pp='git pull --rebase origin main && git fetch origin && git submodule update --init --recursive'
 alias gc-='git checkout -'
 alias gcb='git checkout -b'
 alias gc.='git checkout .'
@@ -17,6 +17,7 @@ alias gap='git add -p'
 alias gcam='git add . && git commit -m'
 alias gpuo='git push -u origin $(git branch --show-current)'
 alias gcasm='git add . && git commit -s -m'
+alias wip='git commit -am "wip"'
 alias nrd='npm run dev'
 alias hs='history | grep'
 alias f='find . -iname'
@@ -27,12 +28,15 @@ alias ys='yarn start'
 alias s='source ~/.zshrc'
 alias vim='neovide --frame=transparent --title-hidden --fork'
 alias rc='vim ~/.zshrc'
+alias dup='devenv up'
+alias docker='podman'
 alias aliases='vim ~/kod/dotfiles/aliases/aliases'
 alias notes='nvim ~/notes.txt'
 alias rust='evcxr'
 alias ctr='cargo test --release'
 alias vconfig='vim ~/.config/nvim'
 alias json='pbpaste | jq > ~/kod/slask.json && vim ~/kod/slask.json'
+alias ls='eza -l --icons=auto -a --group-directories-first'
 
 ip () {
     ifconfig | grep "inet " | grep -v 127.0.0.1 | grep 192 | awk '{print $2}'
@@ -53,6 +57,8 @@ killport () {
 make-gif () {
     ffmpeg -i $1 -vf "fps=10,scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 $2
 }
+
+# todo break out a function main_or_master() and use also in pp
 
 unalias gcm >/dev/null 2>/dev/null
 gcm () {
