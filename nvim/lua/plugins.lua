@@ -89,5 +89,6 @@ return {
     { 'HiPhish/rainbow-delimiters.nvim' },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     { 'stevearc/conform.nvim', opts = {} },
+    { 'mfussenegger/nvim-lint' },
     { "j-hui/fidget.nvim", opts = {  }, }
 }
