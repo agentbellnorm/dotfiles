@@ -4,7 +4,7 @@ INITIAL_WORKING_DIRECTORY=$(pwd)
 
 git submodule update --init --recursive
 
-for directory in "aerospace" "aliases" "nvim"; do
+for directory in "aerospace" "aliases" "nvim" "terminal"; do
     echo "setting up $directory \n";
 
     cd "$directory"

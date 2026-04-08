@@ -1,0 +1,10 @@
+name: main
+root: ~/
+
+windows:
+  - main:
+      layout: even-vertical
+      panes:
+        - cd ~/kod/lovable && devenv deps
+        - cd ~/kod/lovable && claude
+        - shell

@@ -1,0 +1,62 @@
+#!/bin/zsh
+
+# ── config ──────────────────────────────────────────────
+MONOREPO="${MONOREPO_PATH:-$HOME/code/myrepo}"
+# ────────────────────────────────────────────────────────
+
+# ── parse flags ───────────────────────────────────────
+FROM_HEAD=false
+while [[ "$1" == --* ]]; do
+  case "$1" in
+    --head) FROM_HEAD=true; shift ;;
+    *) echo "Unknown option: $1" >&2; exit 1 ;;
+  esac
+done
+
+BRANCH="${1:?Usage: new-worktree [--head] <branch-name>}"
+WORKTREE_DIR="$MONOREPO/../worktrees/$BRANCH"
+
+# Create the git worktree
+if $FROM_HEAD; then
+  git -C "$MONOREPO" worktree add "$WORKTREE_DIR" -b "$BRANCH"
+else
+  git -C "$MONOREPO" fetch origin main
+  git -C "$MONOREPO" worktree add "$WORKTREE_DIR" -b "$BRANCH" origin/main
+fi
+
+# Gitignored files to symlink into new worktrees
+SYMLINK_FILES=(
+  lefthook-local.yml
+  CLAUDE.local.md
+  .claude/settings.local.json
+  go/api/.env.local
+)
+
+for file in "${SYMLINK_FILES[@]}"; do
+  if [[ -f "$MONOREPO/$file" ]]; then
+    mkdir -p "$WORKTREE_DIR/${file:h}"
+    ln -s "$MONOREPO/$file" "$WORKTREE_DIR/$file"
+  fi
+done
+
+# Create a tmuxinator config for this worktree on the fly
+TMUX_CONFIG=$(mktemp /tmp/tmuxinator-wt-XXXXXX.yml)
+
+cat > "$TMUX_CONFIG" <<EOF
+name: wt-$BRANCH
+root: $WORKTREE_DIR
+
+windows:
+  - worktree-$BRANCH:
+      layout: main-vertical
+      panes:
+        - shell
+        - claude
+        - process-compose
+EOF
+
+# Launch it — opens as a new window in current tmux session
+tmuxinator start -p "$TMUX_CONFIG" --no-name
+
+# Clean up temp file
+rm "$TMUX_CONFIG"
