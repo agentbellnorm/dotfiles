@@ -5,6 +5,6 @@ windows:
   - main:
       layout: even-vertical
       panes:
-        - <%= ENV['LOVBOX_RUNTIME_PROFILE'] ? 'process-compose process list' : 'devenv deps' %>
+        - <%= File.exist?('/opt/lovbox/env/bash_env') ? 'process-compose process list' : 'devenv deps' %>
         - claude
-        - shell
+        - ':'

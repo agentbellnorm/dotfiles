@@ -5,9 +5,9 @@ dotfiles_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 export DOTFILES_DIR="$dotfiles_dir"
 export MONOREPO_PATH="${MONOREPO_PATH:-$HOME/lovable}"
 
-if ! command -v zsh >/dev/null 2>&1 || ! command -v tmuxinator >/dev/null 2>&1; then
+if ! command -v zsh >/dev/null 2>&1 || ! command -v tmuxinator >/dev/null 2>&1 || ! command -v nvim >/dev/null 2>&1; then
     sudo apt-get update -qq
-    sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends zsh tmuxinator
+    sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends zsh tmuxinator neovim
 fi
 
 mkdir -p "$HOME/.config/tmuxinator" "$HOME/.local/bin"
@@ -19,6 +19,7 @@ link_if_missing() {
 link_if_missing "$dotfiles_dir/terminal/tmux.conf" "$HOME/.tmux.conf"
 link_if_missing "$dotfiles_dir/terminal/tmuxinator/main.yml" "$HOME/.config/tmuxinator/main.yml"
 link_if_missing "$dotfiles_dir/terminal/bin/new-worktree" "$HOME/.local/bin/new-worktree"
+link_if_missing "$dotfiles_dir/nvim" "$HOME/.config/nvim"
 
 if ! grep -Fq '# dotfiles-lovbox zsh' "$HOME/.zshrc" 2>/dev/null; then
     cat >> "$HOME/.zshrc" <<'EOF'
@@ -29,6 +30,15 @@ export MONOREPO_PATH="$HOME/lovable"
 export SHELL=/usr/bin/zsh
 source "$DOTFILES_DIR/aliases/aliases"
 eval "$(direnv hook zsh)"
+EOF
+fi
+
+if ! grep -Fq '# dotfiles-lovbox prompt' "$HOME/.zshrc"; then
+    cat >> "$HOME/.zshrc" <<'EOF'
+
+# dotfiles-lovbox prompt
+export EDITOR=nvim
+PROMPT='%n:%~%# '
 EOF
 fi
 
