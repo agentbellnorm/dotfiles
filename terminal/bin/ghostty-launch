@@ -1,0 +1,47 @@
+#!/bin/zsh
+setopt pipefail
+
+# Ghostty launched from Finder may not inherit the Homebrew or user bin paths.
+export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin"
+
+launch_local() {
+  if tmux has-session -t main 2>/dev/null; then
+    exec tmux attach-session -t main
+  fi
+  exec tmuxinator start main
+}
+
+launch_lovbox() {
+  local box=morgan-dev
+  local lovbox="$HOME/.local/bin/lovbox"
+  local box_status
+
+  if [[ ! -x "$lovbox" || ! -f "$HOME/.ssh/lovbox.pub" ]]; then
+    print -u2 -- 'Lovbox CLI or ~/.ssh/lovbox.pub is missing.'
+    return 1
+  fi
+
+  if ! box_status="$("$lovbox" list --json | jq -r --arg name "$box" '.[] | select(.name == $name) | .status')"; then
+    print -u2 -- 'Could not check the Lovbox status.'
+    return 1
+  fi
+
+  case "$box_status" in
+    '') "$lovbox" create "$box" --if-exists reuse --no-wait >/dev/null || return 1 ;;
+    [Ss]topped) "$lovbox" start "$box" || return 1 ;;
+  esac
+
+  "$lovbox" exec --tty --key "$HOME/.ssh/lovbox.pub" "$box" -- \
+    bash /home/lovable/kod/dotfiles/lovbox/launch-tmux.sh
+}
+
+while true; do
+  printf '\nWhere should this Ghostty terminal run?\n  1) Local\n  2) Lovbox (morgan-dev)\nChoice [1]: '
+  IFS= read -r choice || exit 0
+
+  case "$choice" in
+    ''|1|[Ll]) launch_local ;;
+    2|[Bb]) launch_lovbox && exit 0 ;;
+    *) print -- 'Choose 1 or 2.' ;;
+  esac
+done

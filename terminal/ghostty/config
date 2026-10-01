@@ -1,4 +1,4 @@
-command = /bin/zsh -l -c "tmux has-session -t main 2>/dev/null && tmux attach-session -t main || tmuxinator start main"
+command = /bin/zsh -l -c "exec ~/.local/bin/ghostty-launch"
 
 font-size = 11
 window-decoration = true
