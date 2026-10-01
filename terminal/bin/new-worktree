@@ -57,7 +57,7 @@ windows:
       layout: main-vertical
       panes:
         - shell
-        - nvim
+        - nvim .
         - process-compose
 EOF
 

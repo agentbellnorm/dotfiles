@@ -6,5 +6,5 @@ windows:
       layout: even-vertical
       panes:
         - <%= File.exist?('/opt/lovbox/env/bash_env') ? 'process-compose process list' : 'devenv deps' %>
-        - nvim
+        - nvim .
         - ':'
