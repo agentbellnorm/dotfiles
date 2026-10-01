@@ -24,6 +24,7 @@ link_if_missing() {
 }
 link_if_missing "$dotfiles_dir/terminal/tmux.conf" "$HOME/.tmux.conf"
 link_if_missing "$dotfiles_dir/terminal/tmuxinator/main.yml" "$HOME/.config/tmuxinator/main.yml"
+link_if_missing "$dotfiles_dir/terminal/tmuxinator/morgan-os.yml" "$HOME/.config/tmuxinator/morgan-os.yml"
 link_if_missing "$dotfiles_dir/terminal/bin/new-worktree" "$HOME/.local/bin/new-worktree"
 link_if_missing "$dotfiles_dir/nvim" "$HOME/.config/nvim"
 link_if_missing "$dotfiles_dir/zsh/zshrc.lovbox" "$HOME/.zshrc"

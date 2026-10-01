@@ -5,16 +5,21 @@ setopt pipefail
 export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin"
 
 launch_local() {
-  if tmux has-session -t main 2>/dev/null; then
-    exec tmux attach-session -t main
+  local session="${1:-main}"
+  if tmux has-session -t "$session" 2>/dev/null; then
+    exec tmux attach-session -t "$session"
   fi
-  exec tmuxinator start main
+  exec tmuxinator start "$session"
 }
 
 launch_lovbox() {
+  local session="${1:-main}"
   local box=morgan-dev
   local lovbox="$HOME/.local/bin/lovbox"
   local box_status
+  local -a agent_options
+
+  [[ "$session" == morgan-os ]] && agent_options=(--forward-agent)
 
   if [[ ! -x "$lovbox" || ! -f "$HOME/.ssh/lovbox.pub" ]]; then
     print -u2 -- 'Lovbox CLI or ~/.ssh/lovbox.pub is missing.'
@@ -31,17 +36,19 @@ launch_lovbox() {
     [Ss]topped) "$lovbox" start "$box" || return 1 ;;
   esac
 
-  "$lovbox" exec --tty --key "$HOME/.ssh/lovbox.pub" "$box" -- \
-    bash /home/lovable/kod/dotfiles/lovbox/launch-tmux.sh
+  "$lovbox" exec --tty --key "$HOME/.ssh/lovbox.pub" "${agent_options[@]}" "$box" -- \
+    bash /home/lovable/kod/dotfiles/lovbox/launch-tmux.sh "$session"
 }
 
 while true; do
-  printf '\nWhere should this Ghostty terminal run?\n  1) Local\n  2) Lovbox (morgan-dev)\nChoice [1]: '
+  printf '\nWhere should this Ghostty terminal run?\n  1) Local (main)\n  2) Lovbox (main)\n  3) Local (Morgan OS)\n  4) Lovbox (Morgan OS)\nChoice [1]: '
   IFS= read -r choice || exit 0
 
   case "$choice" in
-    ''|1|[Ll]) launch_local ;;
-    2|[Bb]) launch_lovbox && exit 0 ;;
-    *) print -- 'Choose 1 or 2.' ;;
+    ''|1|[Ll]) launch_local main ;;
+    2|[Bb]) launch_lovbox main && exit 0 ;;
+    3) launch_local morgan-os ;;
+    4) launch_lovbox morgan-os && exit 0 ;;
+    *) print -- 'Choose 1, 2, 3, or 4.' ;;
   esac
 done

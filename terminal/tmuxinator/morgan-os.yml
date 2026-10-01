@@ -1,0 +1,7 @@
+name: morgan-os
+root: <%= ENV.fetch('MORGAN_OS_PATH') { File.join(ENV.fetch('HOME'), 'kod', 'morgan-os') } %>
+
+windows:
+  - codex:
+      panes:
+        - codex

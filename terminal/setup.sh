@@ -31,6 +31,8 @@ echo "linking tmuxinator config"
 mkdir -p ~/.config/tmuxinator
 rm -f ~/.config/tmuxinator/main.yml
 ln -s "$(pwd)/tmuxinator/main.yml" ~/.config/tmuxinator/main.yml
+rm -f ~/.config/tmuxinator/morgan-os.yml
+ln -s "$(pwd)/tmuxinator/morgan-os.yml" ~/.config/tmuxinator/morgan-os.yml
 
 # ── new-worktree script ────────────────────────────────
 echo "linking new-worktree script"
