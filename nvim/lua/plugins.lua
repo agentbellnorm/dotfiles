@@ -1,3 +1,5 @@
+local use_lsp = require('profile').use_lsp
+
 return {
     {
         'nvim-telescope/telescope.nvim',
@@ -21,6 +23,7 @@ return {
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v4.x',
+        enabled = use_lsp,
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },             -- Required
@@ -33,8 +36,8 @@ return {
             { 'L3MON4D3/LuaSnip' },     -- Required
         }
     },
-    { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-    { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+    { 'hrsh7th/cmp-nvim-lsp-signature-help', enabled = use_lsp },
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim', enabled = use_lsp },
     {
         "Pocco81/auto-save.nvim",
         config = function()
@@ -50,6 +53,7 @@ return {
         version = '^5', -- Recommended
         lazy = false, -- This plugin is already lazy
         ft = { 'rust' },
+        enabled = use_lsp,
     },
     {
         'numToStr/Comment.nvim',
@@ -90,5 +94,5 @@ return {
     { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     { 'stevearc/conform.nvim', opts = {} },
     { 'mfussenegger/nvim-lint' },
-    { "j-hui/fidget.nvim", opts = {  }, }
+    { "j-hui/fidget.nvim", opts = {  }, enabled = use_lsp }
 }

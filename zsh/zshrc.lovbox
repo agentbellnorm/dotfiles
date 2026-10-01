@@ -2,6 +2,7 @@ export DOTFILES_DIR="$HOME/kod/dotfiles"
 export MONOREPO_PATH="$HOME/lovable"
 export SHELL=/usr/bin/zsh
 export EDITOR=nvim
+export NVIM_DISABLE_LSP=1
 export PATH="$HOME/.local/bin:$PATH"
 
 (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"

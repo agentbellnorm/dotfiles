@@ -1,3 +1,7 @@
+if not require("profile").use_lsp then
+	return
+end
+
 -- rustaceanvim is configured automatically and doesn't need explicit setup
 -- The plugin will automatically configure rust-analyzer and provide enhanced features
 

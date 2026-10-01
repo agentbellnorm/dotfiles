@@ -9,6 +9,9 @@ Export either variable before sourcing `aliases/aliases` to override the default
 `MONOREPO_PATH`. Keep it exported in the shell that starts tmuxinator.
 Tmuxinator starts `devenv deps` on a laptop; on a Lovbox, the dev stack is
 already running, so its first pane shows the process list instead.
+The editor pane opens `nvim` in both the main session and new worktree sessions.
+On a Lovbox, Neovim skips LSP plugins and language servers while keeping
+Tree-sitter syntax highlighting; local Neovim keeps its LSP configuration.
 
 On macOS, `terminal/setup.sh` links the Ghostty launcher into `~/.local/bin`.
 Each new Ghostty terminal asks whether to attach to the local `main` tmux

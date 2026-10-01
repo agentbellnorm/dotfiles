@@ -1,3 +1,7 @@
+if not require("profile").use_lsp then
+	return
+end
+
 -- Load lsp-zero and required modules
 local lsp_zero = require("lsp-zero")
 local lspconfig = require("lspconfig")
