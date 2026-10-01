@@ -1,10 +1,10 @@
 name: main
-root: ~/
+root: <%= ENV.fetch('MONOREPO_PATH') { File.exist?(File.join(ENV.fetch('HOME'), 'lovable', '.git')) ? File.join(ENV.fetch('HOME'), 'lovable') : File.join(ENV.fetch('HOME'), 'kod', 'lovable') } %>
 
 windows:
   - main:
       layout: even-vertical
       panes:
-        - cd ~/kod/lovable && devenv deps
-        - cd ~/kod/lovable && claude
+        - <%= ENV['LOVBOX_RUNTIME_PROFILE'] ? 'process-compose process list' : 'devenv deps' %>
+        - claude
         - shell

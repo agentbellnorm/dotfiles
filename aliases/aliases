@@ -1,5 +1,14 @@
 # vim: set filetype=sh:
 
+export DOTFILES_DIR="${DOTFILES_DIR:-$HOME/kod/dotfiles}"
+if [ -z "${MONOREPO_PATH:-}" ]; then
+    if [ -e "$HOME/lovable/.git" ]; then
+        export MONOREPO_PATH="$HOME/lovable"
+    else
+        export MONOREPO_PATH="$HOME/kod/lovable"
+    fi
+fi
+
 export LC_CTYPE=$LANG
 
 
@@ -26,31 +35,39 @@ alias k='kubectl'
 alias yt='yarn test'
 alias ys='yarn start'
 alias s='source ~/.zshrc'
-alias vim='neovide --frame=transparent --title-hidden --fork'
+if command -v neovide >/dev/null 2>&1; then
+    alias vim='neovide --frame=transparent --title-hidden --fork'
+fi
 alias rc='vim ~/.zshrc'
 alias dup='devenv up'
 alias docker='podman'
-alias aliases='vim ~/kod/dotfiles/aliases/aliases'
+alias aliases='vim "$DOTFILES_DIR/aliases/aliases"'
 alias notes='nvim ~/notes.txt'
 alias rust='evcxr'
 alias ctr='cargo test --release'
 alias vconfig='vim ~/.config/nvim'
 alias json='pbpaste | jq > ~/kod/slask.json && vim ~/kod/slask.json'
-alias ls='eza -l --icons=auto -a --group-directories-first'
+if command -v eza >/dev/null 2>&1; then
+    alias ls='eza -l --icons=auto -a --group-directories-first'
+fi
+alias cc='claude'
+alias ccc='claude --continue'
 
 ip () {
     ifconfig | grep "inet " | grep -v 127.0.0.1 | grep 192 | awk '{print $2}'
 }
 
-killport () {  
-    pid=$(lsof -ti ":$1")
-    if [ -z "$pid" ]; then
+killport () {
+    pids=($(lsof -ti ":$1" -sTCP:LISTEN))
+    if [ ${#pids[@]} -eq 0 ]; then
         echo "no one is using port $1"
     else
         echo "port $1 is used by:"
-        ps -p "$pid"
-        echo "killing pid $pid"
-        kill -9 "$pid"
+        ps -p "${pids[@]}"
+        for pid in "${pids[@]}"; do
+            echo "killing pid $pid"
+            kill -9 "$pid"
+        done
     fi
 }
 
@@ -82,4 +99,14 @@ ns () {
 
 gcr() {
     git reflog | grep "checkout:" | awk '{print $NF}' | uniq | fzf --prompt="Select a branch: " --height=10 --reverse | xargs git checkout
+}
+
+jwt() {
+  pbpaste | tr -d '[:space:]' | jq -Rr '
+    split(".")[:2][]
+    | gsub("-"; "+")
+    | gsub("_"; "/")
+    | . + (["", "===", "==", "="][length % 4])
+    | @base64d
+  ' | jq .
 }

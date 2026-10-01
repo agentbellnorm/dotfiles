@@ -1,7 +1,13 @@
 #!/bin/zsh
 
 # ── config ──────────────────────────────────────────────
-MONOREPO="${MONOREPO_PATH:-$HOME/code/myrepo}"
+if [[ -n "${MONOREPO_PATH:-}" ]]; then
+  MONOREPO="$MONOREPO_PATH"
+elif [[ -e "$HOME/lovable/.git" ]]; then
+  MONOREPO="$HOME/lovable"
+else
+  MONOREPO="$HOME/kod/lovable"
+fi
 # ────────────────────────────────────────────────────────
 
 # ── parse flags ───────────────────────────────────────
