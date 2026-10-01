@@ -25,3 +25,10 @@ to enter Zsh. It also installs Ghostty's terminfo entry so remote tmux can use
 `TERM=xterm-ghostty`. The login hook reruns
 the setup if a new pod needs the system packages again. The home directory,
 including your shell and tmux config, persists across pod replacements.
+
+`zsh/oh-my-zsh.zsh` holds the shared Oh My Zsh theme and plugin choices.
+`zsh/p10k.zsh` is Morgan's Powerlevel10k prompt configuration and is linked as
+`~/.p10k.zsh` on both machines. The Mac and Lovbox source the shared settings
+from their own `zshrc` files, so Mac-only tool initialization stays local.
+`zsh/install.sh` installs Oh My Zsh, Powerlevel10k, and zsh-autosuggestions
+when absent; the setup scripts leave existing checkouts alone.

@@ -14,6 +14,8 @@ if ! infocmp -x xterm-ghostty >/dev/null 2>&1; then
     tic -x -o "$HOME/.terminfo" "$dotfiles_dir/terminal/terminfo/xterm-ghostty.ti"
 fi
 
+"$dotfiles_dir/zsh/install.sh"
+
 mkdir -p "$HOME/.config/tmuxinator" "$HOME/.local/bin"
 link_if_missing() {
     if [[ ! -e "$2" && ! -L "$2" ]]; then
@@ -24,27 +26,7 @@ link_if_missing "$dotfiles_dir/terminal/tmux.conf" "$HOME/.tmux.conf"
 link_if_missing "$dotfiles_dir/terminal/tmuxinator/main.yml" "$HOME/.config/tmuxinator/main.yml"
 link_if_missing "$dotfiles_dir/terminal/bin/new-worktree" "$HOME/.local/bin/new-worktree"
 link_if_missing "$dotfiles_dir/nvim" "$HOME/.config/nvim"
-
-if ! grep -Fq '# dotfiles-lovbox zsh' "$HOME/.zshrc" 2>/dev/null; then
-    cat >> "$HOME/.zshrc" <<'EOF'
-
-# dotfiles-lovbox zsh
-export DOTFILES_DIR="$HOME/kod/dotfiles"
-export MONOREPO_PATH="$HOME/lovable"
-export SHELL=/usr/bin/zsh
-source "$DOTFILES_DIR/aliases/aliases"
-eval "$(direnv hook zsh)"
-EOF
-fi
-
-if ! grep -Fq '# dotfiles-lovbox prompt' "$HOME/.zshrc"; then
-    cat >> "$HOME/.zshrc" <<'EOF'
-
-# dotfiles-lovbox prompt
-export EDITOR=nvim
-PROMPT='%n:%~%# '
-EOF
-fi
+link_if_missing "$dotfiles_dir/zsh/zshrc.lovbox" "$HOME/.zshrc"
 
 if [[ ! -e "$HOME/.tmux.conf.local" ]]; then
     printf 'set -g default-shell %s\n' "$(command -v zsh)" > "$HOME/.tmux.conf.local"
