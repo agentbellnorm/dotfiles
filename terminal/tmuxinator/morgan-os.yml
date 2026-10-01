@@ -1,5 +1,5 @@
 name: morgan-os
-root: <%= ENV.fetch('MORGAN_OS_PATH') { File.join(ENV.fetch('HOME'), 'kod', File.exist?('/opt/lovbox/env/bash_env') ? 'morgan-brain' : 'morgan-os') } %>
+root: <%= ENV.fetch('MORGAN_OS_PATH') { File.join(ENV.fetch('HOME'), 'kod', 'morgan-brain') } %>
 
 windows:
   - codex:

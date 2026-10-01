@@ -14,20 +14,19 @@ On a Lovbox, Neovim skips LSP plugins and language servers while keeping
 Tree-sitter syntax highlighting; local Neovim keeps its LSP configuration.
 
 On macOS, `terminal/setup.sh` links the Ghostty launcher into `~/.local/bin`.
-Each new Ghostty terminal offers `main` locally (press Enter or 1) or on the
-`morgan-dev` Lovbox (2), plus a Morgan OS session locally (3) or on the Lovbox
-(4). The Morgan OS session starts one Codex pane in the `morgan-brain` repo
-(`~/kod/morgan-os` on the Mac, `~/kod/morgan-brain` on the Lovbox). Set
-`MORGAN_OS_PATH` to override the checkout location. The Lovbox choices use
-`~/.ssh/lovbox.pub` with the 1Password SSH agent, start a paused box, and run
-the remote setup before attaching to tmux. The Morgan OS choice also forwards
-the SSH agent so Codex can access the private repo. Ghostty's
+Each new Ghostty terminal asks whether to use the local `main` session (Enter
+or 1) or the `morgan-dev` Lovbox (2). The Lovbox choice uses `~/.ssh/lovbox.pub`
+with the 1Password SSH agent, starts a paused box, and runs the remote setup
+before attaching to `main`. It also forwards the SSH agent so the Codex session
+can access the private repo. Ghostty's
 quick terminal keeps its selection when hidden and shown again.
 
-To create or attach to Morgan OS from a shell, run `tmuxinator start morgan-os`.
-Within tmux, use `tmux switch-client -t morgan-os` to switch to it. It stays
-running after you detach, just like `main`; reconnecting attaches to the same
-Codex pane.
+On the Lovbox, setup also keeps a `morgan-os` tmux session running with one
+Codex pane in `~/kod/morgan-brain` (`MORGAN_OS_PATH` overrides that path).
+Switch between `main` and `morgan-os` with `Ctrl-Space`, then `Tab` to open the
+tmux session picker, or run `tmux switch-client -t morgan-os` from inside tmux.
+The Morgan OS session persists after detaching and is recreated on the next
+Lovbox login if it has ended.
 
 The root `setup.sh` is for macOS and uses Homebrew and AeroSpace. Lovbox
 includes tmux and fzf. From a Lovbox checkout at `~/kod/dotfiles`, run
