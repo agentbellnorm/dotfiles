@@ -1,16 +1,17 @@
-# Powerlevel10k instant prompt must be loaded before other Zsh initialization.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export DOTFILES_DIR="$HOME/kod/dotfiles"
 export MONOREPO_PATH="$HOME/lovable"
 export SHELL=/usr/bin/zsh
 export EDITOR=nvim
 export PATH="$HOME/.local/bin:$PATH"
 
-source "$DOTFILES_DIR/zsh/oh-my-zsh.zsh"
-if command -v direnv >/dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+
+# Powerlevel10k instant prompt must be loaded before other Zsh initialization.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+(( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+
+source "$DOTFILES_DIR/zsh/oh-my-zsh.zsh"
 [[ ! -f "$DOTFILES_DIR/zsh/p10k.zsh" ]] || source "$DOTFILES_DIR/zsh/p10k.zsh"
