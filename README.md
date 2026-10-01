@@ -21,6 +21,7 @@ The root `setup.sh` is for macOS and uses Homebrew and AeroSpace. Lovbox
 includes tmux and fzf. From a Lovbox checkout at `~/kod/dotfiles`, run
 `./lovbox/setup.sh` to install Zsh and tmuxinator, link the tmux config and
 worktree helper, install Neovim and link its config, and configure SSH login
-to enter Zsh. The login hook reruns
+to enter Zsh. It also installs Ghostty's terminfo entry so remote tmux can use
+`TERM=xterm-ghostty`. The login hook reruns
 the setup if a new pod needs the system packages again. The home directory,
 including your shell and tmux config, persists across pod replacements.

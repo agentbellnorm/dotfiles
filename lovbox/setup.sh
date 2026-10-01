@@ -5,9 +5,13 @@ dotfiles_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 export DOTFILES_DIR="$dotfiles_dir"
 export MONOREPO_PATH="${MONOREPO_PATH:-$HOME/lovable}"
 
-if ! command -v zsh >/dev/null 2>&1 || ! command -v tmuxinator >/dev/null 2>&1 || ! command -v nvim >/dev/null 2>&1; then
+if ! command -v zsh >/dev/null 2>&1 || ! command -v tmuxinator >/dev/null 2>&1 || ! command -v nvim >/dev/null 2>&1 || ! command -v tic >/dev/null 2>&1; then
     sudo apt-get update -qq
-    sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends zsh tmuxinator neovim
+    sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends zsh tmuxinator neovim ncurses-bin
+fi
+
+if ! infocmp -x xterm-ghostty >/dev/null 2>&1; then
+    tic -x -o "$HOME/.terminfo" "$dotfiles_dir/terminal/terminfo/xterm-ghostty.ti"
 fi
 
 mkdir -p "$HOME/.config/tmuxinator" "$HOME/.local/bin"
