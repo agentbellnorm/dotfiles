@@ -13,4 +13,4 @@ source "$DOTFILES_DIR/zsh/oh-my-zsh.zsh"
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
-[[ ! -f "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
+[[ ! -f "$DOTFILES_DIR/zsh/p10k.zsh" ]] || source "$DOTFILES_DIR/zsh/p10k.zsh"
