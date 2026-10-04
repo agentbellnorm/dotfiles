@@ -1,10 +1,10 @@
 name: main
-root: <%= ENV.fetch('MONOREPO_PATH') { File.exist?(File.join(ENV.fetch('HOME'), 'lovable', '.git')) ? File.join(ENV.fetch('HOME'), 'lovable') : File.join(ENV.fetch('HOME'), 'kod', 'lovable') } %>
+root: <%= ENV.fetch('MONOREPO_PATH') { File.join(ENV.fetch('HOME'), 'kod', 'lovable') } %>
 
 windows:
   - main:
       layout: even-vertical
       panes:
-        - <%= File.exist?('/opt/lovbox/env/bash_env') ? 'process-compose process list' : 'devenv deps' %>
+        - devenv deps
         - nvim .
         - ':'

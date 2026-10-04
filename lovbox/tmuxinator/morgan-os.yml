@@ -4,4 +4,4 @@ root: <%= ENV.fetch('MORGAN_OS_PATH') { File.join(ENV.fetch('HOME'), 'kod', 'mor
 windows:
   - codex:
       panes:
-        - codex
+        - codex resume

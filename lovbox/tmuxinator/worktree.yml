@@ -1,0 +1,10 @@
+name: wt-<%= ENV.fetch('WORKTREE_NAME') %>
+root: <%= ENV.fetch('WORKTREE_PATH') %>
+
+windows:
+  - worktree:
+      layout: main-vertical
+      panes:
+        - ':'
+        - nvim .
+        - process-compose process list

@@ -15,8 +15,5 @@ if [[ -n "${SSH_AUTH_SOCK:-}" && -S "$SSH_AUTH_SOCK" ]]; then
     export SSH_AUTH_SOCK="$HOME/.ssh/lovbox-forwarded-agent.sock"
 fi
 
-if ! tmux has-session -t morgan-os 2>/dev/null; then
-    tmuxinator start morgan-os --no-attach
-fi
-
-exec zsh -lic 'if tmux has-session -t main 2>/dev/null; then exec tmux attach-session -t main; else exec tmuxinator start main; fi'
+"$HOME/kod/dotfiles/lovbox/start-sessions.sh"
+exec tmux attach-session -t '=main'

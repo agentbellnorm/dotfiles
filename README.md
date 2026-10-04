@@ -28,6 +28,25 @@ tmux session picker, or run `tmux switch-client -t morgan-os` from inside tmux.
 The Morgan OS session persists after detaching and is recreated on the next
 Lovbox login if it has ended.
 
+Lovbox tmux uses `lovbox/tmux.conf`, which extends the shared shortcuts in
+`terminal/tmux.conf`. Its layouts live in `lovbox/tmuxinator/`; the Mac's
+layouts stay in `terminal/tmuxinator/`. Lovbox worktrees show the existing
+process list instead of starting another dev stack.
+
+Tmux Resurrect and Continuum save sessions, windows, panes, working directories,
+and pane scrollback to `~/.local/state/lovbox/tmux/`. Saves run every minute while
+attached, after layout changes, and on detach. `Ctrl-Space`, then `Ctrl-S` saves
+immediately; `Ctrl-Space`, then `Ctrl-R` restores the latest snapshot manually.
+The launcher restores the saved environment before creating missing `main` and
+`morgan-os` sessions. This includes worktree sessions created after setup.
+
+Recovery relaunches Neovim and opens `codex resume` in saved Codex panes so you
+can select the previous conversation. It also restores process-list panes;
+builds and dev servers return as shells. Snapshots do not preserve process
+memory, running requests, or unsaved editor buffers. History saved by Codex
+remains in the persistent home directory. There is no snapshot of tmux sessions
+lost before this setup was installed.
+
 The root `setup.sh` is for macOS and uses Homebrew and AeroSpace. Lovbox
 includes tmux and fzf. From a Lovbox checkout at `~/kod/dotfiles`, run
 `./lovbox/setup.sh` to install Zsh and tmuxinator, link the tmux config and

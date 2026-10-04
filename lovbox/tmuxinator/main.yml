@@ -1,0 +1,10 @@
+name: main
+root: <%= ENV.fetch('MONOREPO_PATH') { File.join(ENV.fetch('HOME'), 'lovable') } %>
+
+windows:
+  - main:
+      layout: even-vertical
+      panes:
+        - process-compose process list
+        - nvim .
+        - ':'

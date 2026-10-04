@@ -45,6 +45,13 @@ for file in "${SYMLINK_FILES[@]}"; do
   fi
 done
 
+# Lovbox layouts are durable configs and use the already-running dev stack.
+if [[ -f /opt/lovbox/env/bash_env ]]; then
+  export WORKTREE_NAME="$BRANCH" WORKTREE_PATH="$WORKTREE_DIR"
+  tmuxinator start -p "${DOTFILES_DIR:-$HOME/kod/dotfiles}/lovbox/tmuxinator/worktree.yml"
+  exit $?
+fi
+
 # Create a tmuxinator config for this worktree on the fly
 TMUX_CONFIG=$(mktemp /tmp/tmuxinator-wt-XXXXXX.yml)
 
