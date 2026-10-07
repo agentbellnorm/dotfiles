@@ -21,6 +21,17 @@ before attaching to `main`. It also forwards the SSH agent so the Codex session
 can access the private repo. Ghostty's
 quick terminal keeps its selection when hidden and shown again.
 
+The launcher detects a sleep gap of at least 20 seconds and replaces this
+window's SSH connection after wake, even if it still appears connected. Lovbox
+SSH also sends a responsiveness check every 15 seconds and disconnects after
+three unanswered checks. The launcher retries in the same window and reattaches
+to an existing tmux session. Ctrl-C during reconnect returns to the launch menu;
+detaching normally also returns to the menu. New connections skip the Lovbox
+setup-readiness wait. `lovbox/setup-ssh.sh` installs the scoped SSH settings in
+`lovbox/ssh-config` without changing GitHub or other hosts' SSH settings.
+The checks detect an unresponsive SSH connection, not an application that still
+responds slowly. A fresh SSH connection can be made without restarting tmux.
+
 On the Lovbox, setup also keeps a `morgan-os` tmux session running with one
 Codex pane in `~/kod/morgan-brain` (`MORGAN_OS_PATH` overrides that path).
 Switch between `main` and `morgan-os` with `Ctrl-Space`, then `Tab` to open the

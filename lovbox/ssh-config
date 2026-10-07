@@ -1,0 +1,9 @@
+# The Lovbox CLI invokes OpenSSH for both direct and gateway connections.
+Host morgan-lovbox *.lovbox-user-sandboxes.svc.*.cluster.d.l5e.io sandcastle.lovable.net
+    ServerAliveInterval 15
+    ServerAliveCountMax 3
+    TCPKeepAlive no
+    ConnectTimeout 10
+
+# Don't let this Include change the scope of the following user config.
+Host *

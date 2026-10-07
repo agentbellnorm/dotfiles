@@ -16,4 +16,7 @@ if [[ -n "${SSH_AUTH_SOCK:-}" && -S "$SSH_AUTH_SOCK" ]]; then
 fi
 
 "$HOME/kod/dotfiles/lovbox/start-sessions.sh"
+if [[ "${1:-}" == --reconnect ]]; then
+    exec tmux attach-session
+fi
 exec tmux attach-session -t '=main'

@@ -41,3 +41,6 @@ ln -s "$(pwd)/bin/new-worktree" ~/.local/bin/new-worktree
 echo "linking Ghostty launcher"
 rm -f ~/.local/bin/ghostty-launch
 ln -s "$(pwd)/bin/ghostty-launch" ~/.local/bin/ghostty-launch
+
+echo "configuring Lovbox SSH responsiveness checks"
+"$(pwd)/../lovbox/setup-ssh.sh"

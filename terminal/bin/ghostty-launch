@@ -3,6 +3,7 @@ setopt pipefail
 
 # Ghostty launched from Finder may not inherit the Homebrew or user bin paths.
 export PATH="$HOME/.local/bin:$PATH:/opt/homebrew/bin"
+zmodload zsh/datetime
 
 launch_local() {
   if tmux has-session -t main 2>/dev/null; then
@@ -11,10 +12,31 @@ launch_local() {
   exec tmuxinator start main
 }
 
+# Refresh this window's SSH transport after sleep, even if it still responds.
+watch_lovbox_sleep() {
+  local launcher_pid="$1" previous="$EPOCHSECONDS" now child_pid ssh_pid
+  while sleep 5; do
+    now="$EPOCHSECONDS"
+    if (( now - previous >= 20 )); then
+      # The launcher owns only its watcher and one foreground Lovbox command.
+      # Target SSH children rather than terminating the CLI or remote tmux.
+      for child_pid in ${(f)"$(pgrep -P "$launcher_pid")"}; do
+        for ssh_pid in ${(f)"$(pgrep -P "$child_pid" -x ssh)"}; do
+          [[ -z "$ssh_pid" ]] || kill -TERM "$ssh_pid" 2>/dev/null
+        done
+      done
+    fi
+    previous="$now"
+  done
+}
+
 launch_lovbox() {
+  setopt localtraps
   local box=morgan-dev
   local lovbox="$HOME/.local/bin/lovbox"
   local box_status
+  local exit_code retry_delay=3 interrupted=false watcher_pid
+  local -a reconnect_args=()
 
   if [[ ! -x "$lovbox" || ! -f "$HOME/.ssh/lovbox.pub" ]]; then
     print -u2 -- 'Lovbox CLI or ~/.ssh/lovbox.pub is missing.'
@@ -31,8 +53,32 @@ launch_lovbox() {
     [Ss]topped) "$lovbox" start "$box" || return 1 ;;
   esac
 
-  "$lovbox" exec --tty --forward-agent --key "$HOME/.ssh/lovbox.pub" "$box" -- \
-    bash /home/lovable/kod/dotfiles/lovbox/launch-tmux.sh
+  trap 'interrupted=true' INT
+  watch_lovbox_sleep "$$" </dev/null &
+  watcher_pid=$!
+  {
+    while true; do
+      # A ready box can still report unfinished setup; don't block on that marker.
+      "$lovbox" exec --no-wait --tty --forward-agent --key "$HOME/.ssh/lovbox.pub" "$box" -- \
+        bash /home/lovable/kod/dotfiles/lovbox/launch-tmux.sh "${reconnect_args[@]}"
+      exit_code=$?
+
+      if "$interrupted" || (( exit_code == 130 )); then
+        return 0
+      fi
+      # A deliberate tmux detach returns to the menu rather than reconnecting.
+      (( exit_code == 0 )) && return 0
+
+      printf '\nLovbox connection ended (exit %s). Reconnecting in %ss; Ctrl-C returns to the menu.\n' "$exit_code" "$retry_delay"
+      sleep "$retry_delay"
+      "$interrupted" && return 0
+      reconnect_args=(--reconnect)
+      (( retry_delay < 30 )) && retry_delay=$(( retry_delay * 2 > 30 ? 30 : retry_delay * 2 ))
+    done
+  } always {
+    kill "$watcher_pid" 2>/dev/null
+    wait "$watcher_pid" 2>/dev/null
+  }
 }
 
 while true; do
@@ -41,7 +87,7 @@ while true; do
 
   case "$choice" in
     ''|1|[Ll]) launch_local ;;
-    2|[Bb]) launch_lovbox && exit 0 ;;
+    2|[Bb]) launch_lovbox ;;
     *) print -- 'Choose 1 or 2.' ;;
   esac
 done
